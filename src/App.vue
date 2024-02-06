@@ -1,15 +1,28 @@
+<script setup>
+import { ref, watch } from "vue";
+import q from "./data/quizzes.json";
+
+const quizzes = ref(q);
+const search = ref("");
+
+watch(search, (newVal) => {
+  const filteredQuizzes = q.filter((quizz) => quizz.name.toLowerCase().includes(newVal.toLowerCase()));
+  quizzes.value = filteredQuizzes;
+});
+</script>
+
 <template>
   <div class="container">
     <header>
       <h1>Quizzes</h1>
-      <input type="text" placeholder="Search" />
+      <input v-model.trim="search" type="text" placeholder="Search" />
     </header>
     <div class="cards">
-      <div class="card">
-        <img src="https://www.open.edu.au/-/media/blog/2023/03-march/careers-in-maths.jpg?h=477&iar=0&w=715&rev=47f96a32d6b4449993d9b33e5d8e7f05&extension=webp&hash=285AEAB654D4E0C839D4BEDA2991F915" alt="" />
+      <div v-for="quizz in quizzes" class="card">
+        <img :src="quizz.img" alt="" />
         <div class="card-text">
-          <h2>Quiz 1</h2>
-          <p>Questions: 10</p>
+          <h2>{{ quizz.name }}</h2>
+          <p>{{ quizz.questions.length }} questions</p>
         </div>
       </div>
     </div>
@@ -30,7 +43,8 @@ header {
 }
 
 header h1 {
-  margin: 0;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 input {
