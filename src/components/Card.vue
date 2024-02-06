@@ -6,7 +6,7 @@ const router = useRouter();
 const { quizz } = defineProps(["quizz"]);
 
 const goToQuizz = () => {
-  router.push(`/quizz/${quizz.id}`);
+  router.push(`/quizzes/${quizz.id}`);
 };
 </script>
 
