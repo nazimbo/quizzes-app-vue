@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import q from "./data/quizzes.json";
+import Card from "./components/Card.vue";
 
 const quizzes = ref(q);
 const search = ref("");
@@ -18,13 +19,7 @@ watch(search, (newVal) => {
       <input v-model.trim="search" type="text" placeholder="Search" />
     </header>
     <div class="cards">
-      <div v-for="quizz in quizzes" class="card">
-        <img :src="quizz.img" alt="" />
-        <div class="card-text">
-          <h2>{{ quizz.name }}</h2>
-          <p>{{ quizz.questions.length }} questions</p>
-        </div>
-      </div>
+      <Card v-for="quizz in quizzes" :key="quizz.id" :quizz="quizz"></Card>
     </div>
   </div>
 </template>
@@ -54,32 +49,9 @@ input {
   width: 200px;
 }
 
-/* CARDS */
 .cards {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-}
-
-.card {
-  width: 300px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-text {
-  padding: 20px;
-}
-
-.card-text h2 {
-  font-weight: bold;
 }
 </style>
