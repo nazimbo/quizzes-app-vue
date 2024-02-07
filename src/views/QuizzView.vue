@@ -20,10 +20,18 @@ const quizz = quizzes.find((quizz) => quizz.id === route.params.id);
       <h1>What is the capital of France?</h1>
     </div>
     <div class="answers">
-      <button>Paris</button>
-      <button>London</button>
-      <button>Berlin</button>
-      <button>Madrid</button>
+      <div class="answer">
+        <p>Paris</p>
+      </div>
+      <div class="answer">
+        <p>London</p>
+      </div>
+      <div class="answer">
+        <p>Berlin</p>
+      </div>
+      <div class="answer">
+        <p>Madrid</p>
+      </div>
     </div>
   </div>
 </template>
@@ -66,25 +74,24 @@ header h4 {
 }
 
 .answers {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
   margin-top: 20px;
 }
 
-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #f1f1f1;
+.answer {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #ddd;
+.answer p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
 }
 
-button:active {
-  background-color: #ccc;
+.answer:hover {
+  background-color: #ddd;
 }
 </style>
