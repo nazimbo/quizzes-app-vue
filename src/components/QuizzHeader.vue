@@ -1,8 +1,14 @@
+<script setup>
+import { defineProps } from "vue";
+
+const { progression, currentQuestionIndex, questionsCount } = defineProps(["progression", "currentQuestionIndex", "questionsCount"]);
+</script>
+
 <template>
   <header>
-    <h4>Question 1/3</h4>
+    <h4>Question {{ currentQuestionIndex + 1 }} / {{ questionsCount }}</h4>
     <div class="progression-bar">
-      <div class="progression"></div>
+      <div class="progression" :style="{ width: progression }"></div>
     </div>
   </header>
 </template>
@@ -29,7 +35,6 @@ header h4 {
 }
 
 .progression {
-  width: 33.33%;
   height: 100%;
   background-color: #4caf50;
   border-radius: 5px;

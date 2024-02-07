@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 
 // Data
@@ -12,15 +12,25 @@ import Question from "../components/Question.vue";
 const route = useRoute();
 
 const quizzId = parseInt(route.params.id);
-
 const quizz = quizzes.find((quizz) => quizz.id === quizzId);
+const currentQuestionIndex = ref(0);
+const questionsCount = quizz.questions.length;
 
-const currentQuestion = ref(0);
+// const progression = ref(`${(currentQuestionIndex.value / questionsCount) * 100}%`);
+
+// watch(currentQuestionIndex, () => {
+//   progression.value = `${(currentQuestionIndex.value / questionsCount) * 100}%`;
+// });
+
+const progression = computed(() => `${(currentQuestionIndex.value / questionsCount) * 100}%`);
 </script>
 
 <template>
-  <QuizzHeader />
-  <Question :question="quizz.questions[currentQuestion]" />
+  <QuizzHeader :currentQuestionIndex="currentQuestionIndex" :questionsCount="questionsCount" :progression="progression" />
+
+  <Question :question="quizz.questions[currentQuestionIndex]" />
+
+  <button @click="currentQuestionIndex++">Next</button>
 </template>
 
 <style scoped></style>
