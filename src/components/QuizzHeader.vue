@@ -6,7 +6,7 @@ const { progression, currentQuestionIndex, questionsCount } = defineProps(["prog
 
 <template>
   <header>
-    <h4>Question {{ currentQuestionIndex + 1 }} / {{ questionsCount }}</h4>
+    <h4>Question {{ currentQuestionIndex }} / {{ questionsCount }}</h4>
     <div class="progression-bar">
       <div class="progression" :style="{ width: progression }"></div>
     </div>
